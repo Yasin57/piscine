@@ -5,12 +5,16 @@ listeNages = []
 commande = ''
 
 def cmd_individu(listeNageur):
-    '''Ajoite un nouveau najeur'''
+    '''Ajoute un nouveau najeur'''
     prénom = input("Prénom du nouveau ? ")
     listeNageur.append( (id,prénom))
     print(listeNageur)
 
 def cmd_nages(listeNages):
+    '''Ajoute types de nages'''
+    nages = input("Nom du nouveau ?")
+    listeNages.append( (id,nages))
+    print(listeNages)
 
 def cmd_ajout(liste):
     """Ajoute un évènement à la liste"""
