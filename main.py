@@ -1,5 +1,8 @@
 liste = [("Pierre","Dos",10),("Paul","Brasse",13),("Léa","Crawl",6), ("Léa","Brasse",8) ]
 commande = ''
+listeNageur = []
+listeNages = []
+commande = ''
 
 def cmd_ajout(liste):
     """Ajoute un évènement à la liste"""
@@ -35,23 +38,24 @@ def cmd_nage(liste):
         if elt[1]== tmp:
             print(f" {elt[0]:11}|  {elt[2]}")
 
-def cmd_exit():
+def cmd_exit(liste):
     tmp = input("En êtes-vous sûr ? (o)ui/(n)on ")
     if tmp == 'o':
+        cmd_save(liste, 'save.backup')
         return False
     else:
         return True
 
-def cmd_save(liste):
+def cmd_save(liste, filename):
     '''sauvegarde la BDD'''
-    fichier = open('save.csv', 'w')
+    fichier = open(filename, 'w')
     for elt in liste:
         fichier.write(elt[0]+','+elt[1]+','+str(elt[2])+"\n")
     fichier.close()
 
 def cmd_load(liste, filename):
     'charge la BDD'
-    fichier = open('filename, 'r')
+    fichier = open(filename, 'r')
     for line in fichier:
         line.strip()
         if line[-1] == '\n':
@@ -85,15 +89,15 @@ while isAlive:
         continue
 
     if commande == 'save':
-        cmd_save(liste)
+        cmd_save(liste, 'save.csv')
         continue
 
     if commande == 'load':
-        cmd_load(liste)
+        cmd_load(liste, 'save.csv')
         continue
 
     if commande == 'exit':
-        isAlive = cmd_exit()
+        isAlive = cmd_exit(liste)
         continue
 
     print(f"Commande {commande} inconnue")
